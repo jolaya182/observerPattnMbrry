@@ -43,7 +43,7 @@ appState.update({
 });
 
 appForm.render('WarForm', 'app');
-offerForm.render(appState.get(), 'offerForm1', 'WarForm', 'offer1', true);
+offerForm.render(appState.get(), 'offerForm1');
 offer.render(appState.get(), 'offer1');
 coverageForm.render(appState.get(), 'coverageForm1');
 coverage.render(appState.get(), 'coverage1');

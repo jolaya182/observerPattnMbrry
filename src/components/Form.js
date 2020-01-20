@@ -73,7 +73,8 @@ class Form {
         Price: war.customer_cost,
         Claim: 0,
         PolicyDetails: war.coverage_details[0].long,
-        PolicyDocument: 'Policy Document'
+        PolicyDocument: 'Policy Document',
+        productPrice: war.product.price
       };
 
       const warranty = {

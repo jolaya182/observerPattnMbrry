@@ -5,7 +5,7 @@ class State extends Subject {
     super();
     this.state = {
       warranties: [],
-      currComponent: 'coverageForm1',
+      currComponent: 'offerForm1',
       selectedWar: {},
       compIdPrnCh: {}
     };

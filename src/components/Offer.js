@@ -12,15 +12,19 @@ class Offer extends Observer {
       warranties &&
       `<form ${hid} id=${i}>${warranties
         .map(war => {
-          return `<div >
-                  <input id=${`war-input-${war.id}`} type='radio' value=${`war-input-${war.id}`}  name=${`war-input`} />
-                      <label for=${`war-input-${war.id}`}> ${
+          return `<div class="rowOffer1 labelPrplBackground" >
+                  <div>
+                      <input id=${`war-input-${war.id}`} type='radio' value=${`war-input-${war.id}`}  name=${`war-input`} />
+                      <label for=${`war-input-${war.id}`}>${
             war.years
           } Year Protection Plan </label>
-                      <label for=${`war-input-${war.id}`}> $${
+                  </div>
+                  <div>    
+                      <div class='bold' id=${`war-input-${war.id}`}>$${
             war.price
-          } </label>
-                      </div>`;
+          } </div>
+                      </div>
+                  </div>`;
         })
         .join('\n')}</form>`
     );

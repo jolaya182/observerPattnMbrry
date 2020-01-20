@@ -1,4 +1,6 @@
+/* eslint-disable class-methods-use-this */
 import Observer from '../lib/Observer';
+import mbBedPic from '../images/mbBedPic.png';
 
 class OfferForm extends Observer {
   constructor(state) {
@@ -6,20 +8,24 @@ class OfferForm extends Observer {
     this.appState = state;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   createMarkup(state, id, child, isHid) {
     // id should be the id from server
     const hid = isHid ? 'hidden' : '';
+    const { coverageDetails } = state;
+    let productPrice = 'Product Price';
+    if (coverageDetails && coverageDetails[0].productPrice) {
+      productPrice = coverageDetails[0].productPrice;
+    }
     // console.log('-->>isHid', isHid);
     return `<div ${hid} id=${id}> 
-        <div>  product price</div>
-        <div> picture </div>    
-        <div> add extended protection</div>
-        <div> powered by mulberry <div>learn more</div></div>
+        <div class="rowOfferLeft"><div class='productPrice'> $${productPrice} <label class='line-through'> $2000</label></div></div>
+        <div class="rowOffer"><div class='bold'> <img src=${mbBedPic}> </div></div>    
+        <div class="rowOfferLeft"><div class='bold'> Add Extended Protection</div></div>
+        <div class="rowOfferLeft"><div class='smallerText'> Powered by <label class="darkPLtr">Mulberry</label> <a href="https://getmulberry.com/customers"class='underLine'> Learn More</a></div></div>
         <div  ${hid} id=${child}>    
          
         </div> 
-        <button id="offerFormBtnAddToCart" type='button'>Add to Cart </button>
+        <div class="rowOffer"><button class="rowOffer" id="offerFormBtnAddToCart" type='button'>Add to Cart </button></div>
     </div>`;
   }
 
@@ -37,7 +43,6 @@ class OfferForm extends Observer {
     if (!isHid) this.bind(state, child);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   bind(state, child) {
     const btn = document.getElementById('offerFormBtnAddToCart');
 

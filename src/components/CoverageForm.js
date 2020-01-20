@@ -13,36 +13,17 @@ class CoverageForm extends Observer {
     const hid = isHid ? 'hidden' : '';
     // console.log('-->>isHid', isHid);
     const { coverageDetails } = state;
-    // const coverageDetails = true
-    //   ? [
-    //       {
-    //         id: 42,
-    //         name: 'home shop silky sleep matress',
-    //         Active: 'Active',
-    //         OrderID: 'Order ID',
-    //         DateIssued: 'Date issued',
-    //         Expiration: 'Expiration',
-    //         Retailer: 'Retailer',
-    //         PlanDuration: 'Plan Duration',
-    //         Price: 'Price',
-    //         Claim: 'Claim',
-    //         PolicyDetails: 'Policy Details',
-    //         PolicyDocument: 'Policy Document'
-    //       }
-    //     ]
-    //   : [];
-    return `<div class="" ${hid} id=${i}> 
-      <div class="column">
-        <div class="row">welcome Jason</div>
-        <div class="row">Hope you are having a great day</div>
-        <div class="row">Your products</div>
-        <div class="row" ${hid} id=${child}>
-          
-          </div>  
-          <div class="row"><button id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button></div>
-          <div class="row"><button id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button></div>
-      </div>      
-    </div>`;
+
+    return `<div ${hid} id=${i}> 
+    <div class='row'><label class='welcome bold'>Welcome Jason!</label></div>
+    <div class='row'><label class='smallerText'>Hope you are having a great day</label></div>
+    <div class='row darkPLtr'>Your Products</div>
+    <div class='row' ${hid} id=${child}>
+      
+      </div>  
+      <div class='row productContainer'><button id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button></div>
+      <div class='row productContainer'><button id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button></div>
+  </div>`;
   }
 
   render(state, id) {

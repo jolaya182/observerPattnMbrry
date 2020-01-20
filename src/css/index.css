@@ -4,6 +4,7 @@
     font-family: sans-serif;
     margin:0;
     padding: 0;
+    background-color: #F6F7FB;
 }
 
 .row{
@@ -11,6 +12,31 @@
     flex-direction: row;
     flex-basis:100%;
     flex:1;
+
+}
+
+.rowOffer{
+    display: flex;
+    flex-direction: row;
+    flex-basis:100%;
+    flex:1;
+    justify-content: space-around;
+
+}
+
+.rowOffer1{
+    display: flex;
+    flex-direction: row;
+    flex-basis:100%;
+    flex:1;
+    justify-content: space-between;
+}
+.rowOfferLeft{
+    display: flex;
+    flex-direction: row;
+    flex-basis:100%;
+    flex:1;
+    justify-content: start;
 }
 
 .column{
@@ -24,6 +50,95 @@
     display: flex;
 }
 
-.productContainer{
-    
+#offerForm1{
+    /* display: flex; */
+    /* justify-content: space-around; */
+
+    /* align-items: center; */
+    /* flex:1; */
 }
+
+
+
+#offerFormBtnAddToCart{
+    background-color: #474747;
+    border: 1px solid;
+    border-radius: 8px;
+    color:white;
+    /* margin:auto; */
+    padding: 10px;
+    /* display: flex; */
+    /* width:100%; */
+    /* align-items: center; */
+}
+
+.productContainer{
+    background-color: ghostwhite;
+}
+
+.darkPLtr{
+ color:#5033B6 ;
+ font: bolder;
+ font-weight: bolder;
+
+}
+
+.labelPrplBackground{
+    background-color: #E6E0FF;
+    margin: 2.5px;
+    padding: 10px;
+}
+.bold{
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+.underLine{
+    font-weight: lighter;
+    text-decoration: underline;
+    color:black;
+
+}
+
+.line-through{
+    font-weight: lighter;
+    text-decoration-line: line-through;
+    color:black;
+    margin:5px;
+
+}
+.smallerText{
+    color:#7D7E7E;
+    font-size: 12px;
+}
+
+.productPrice{
+    font-weight: lighter;
+    color:black;
+    margin:5px;
+}
+
+.productName{
+    font-weight: lighter;
+    color:black;
+    font-size:20px;
+    cursor: pointer;
+}
+
+.welcome{
+    font-size: 30px;
+}
+
+.vSymbol{
+    padding-left: 30px;
+    padding-right: 30px;
+    color:#7D7E7E;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.green{
+    color: #33A507;
+    padding-right: 5px ;
+}
+
