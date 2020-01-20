@@ -6,18 +6,7 @@ class Offer extends Observer {
     // id should be the id from server
     const hid = isHid ? 'hidden' : '';
     // console.log('-->>isHid', isHid);
-    const yearPlan = 3;
-    const warCost = 35;
     const { warranties } = state;
-    // const warranties = true
-    //   ? [
-    //       { id: 42, name: 'warrantiesName2' },
-    //       { id: 43, name: 'warrantiesName3' },
-    //       { id: 44, name: 'warrantiesName4' },
-    //       { id: 45, name: 'warrantiesName5' },
-    //       { id: 46, name: 'warrantiesName6' }
-    //     ]
-    //   : [];
 
     return (
       warranties &&
@@ -25,8 +14,12 @@ class Offer extends Observer {
         .map(war => {
           return `<div >
                   <input id=${`war-input-${war.id}`} type='radio' value=${`war-input-${war.id}`}  name=${`war-input`} />
-                      <label for=${`war-input-${war.id}`}> ${yearPlan} Year Protection Plan </label>
-                      <label for=${`war-input-${war.id}`}> $${warCost} </label>
+                      <label for=${`war-input-${war.id}`}> ${
+            war.years
+          } Year Protection Plan </label>
+                      <label for=${`war-input-${war.id}`}> $${
+            war.price
+          } </label>
                       </div>`;
         })
         .join('\n')}</form>`

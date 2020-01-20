@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 class Form {
   constructor(state) {
     this.appState = state;
@@ -5,7 +6,6 @@ class Form {
       'https://partner-staging.getmulberry.com/api/get_personalized_warranty';
   }
 
-  // eslint-disable-next-line class-methods-use-this
   errMsg(msg, error) {
     console.log(msg, error);
   }
@@ -29,7 +29,6 @@ class Form {
     };
 
     fetch(this.url, options)
-      // eslint-disable-next-line consistent-return
       .then(
         response => {
           if (response) return response.json();
@@ -52,13 +51,90 @@ class Form {
         },
         error => this.errMsg('error from ', error)
       )
-      .catch(err => console.log('it error in sending fetch req', err));
+      .catch(err => console.log('error in sending fetch req', err));
   }
 
   processIncomingData(data) {
-    const state = this.appState.get();
+    const coverageDetails = [];
+    const warranties = [];
+    data.forEach(war => {
+      const coverageDetail = {
+        id: war.id,
+        name: war.product.name,
+        Active: 'Active',
+        OrderID: war.id,
+        DateIssued: this.getDateIssued(war.created_date),
+        Expiration: this.calculateExpirationDate(
+          war.created_date,
+          war.duration_months
+        ),
+        Retailer: war.product.retailer.company_name,
+        PlanDuration: war.duration_months,
+        Price: war.customer_cost,
+        Claim: 0,
+        PolicyDetails: war.coverage_details[0].long,
+        PolicyDocument: 'Policy Document'
+      };
+
+      const warranty = {
+        id: war.id,
+        years: this.getYears(war.duration_months),
+        price: war.customer_cost
+      };
+
+      coverageDetails.push(coverageDetail);
+      warranties.push(warranty);
+    });
+
+    this.appState.update({
+      ...this.appState.get(),
+      coverageDetails,
+      warranties
+    });
+    console.log('state', this.appState.get());
+
+    // warranties: [
+    //   { id: 42, name: 'warrantiesName2' },
+    //   { id: 43, name: 'warrantiesName3' },
+    //   { id: 44, name: 'warrantiesName4' },
+    //   { id: 45, name: 'warrantiesName5' },
+    //   { id: 46, name: 'warrantiesName6' }
+    // ],
+    // coverageDetails: [
+    //   {
+    //     id: 42,
+    //     name: 'home shop silky sleep matress',
+    //     Active: 'Active',
+    //     OrderID: 'Order ID',
+    //     DateIssued: 'Date issued',
+    //     Expiration: 'Expiration',
+    //     Retailer: 'Retailer',
+    //     PlanDuration: 'Plan Duration',
+    //     Price: 'Price',
+    //     Claim: 'Claim',
+    //     PolicyDetails: 'Policy Details',
+    //     PolicyDocument: 'Policy Document'
+    //   }
+    // ]
 
     // this.appState.update();
+  }
+
+  getDateIssued(DateIssued) {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const da = new Date(DateIssued);
+    return da.toLocaleDateString('en-Us', options);
+  }
+
+  calculateExpirationDate(expDate, months) {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const da = new Date(expDate);
+    da.setMonth(da.getMonth() + months);
+    return da.toLocaleDateString('en-Us', options);
+  }
+
+  getYears(months) {
+    return months / 12 < 1 ? Math.ceil(months / 12) : Math.floor(months / 12);
   }
 
   createMarkup() {

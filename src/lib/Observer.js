@@ -14,6 +14,7 @@ class Observer {
     range.selectNode(appCont);
 
     frag = range.createContextualFragment(offerMarkup);
+    console.log('offerMarkup', offerMarkup);
 
     if (id) {
       this.id = id;
@@ -25,8 +26,8 @@ class Observer {
       // if the component does not exist on the Dom then we
       // cannot replace the child
       if (currentComp) {
-        // console.log('***currentId', frag);
-        // console.log('currentComp', currentComp);
+        console.log('***frag', frag);
+        console.log('currentComp', currentComp);
         appCont.replaceChild(frag, currentComp);
       }
     }

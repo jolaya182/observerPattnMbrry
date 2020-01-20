@@ -4,6 +4,7 @@ import CoverageForm from './components/CoverageForm';
 import Coverage from './components/Coverage';
 import OfferForm from './components/OfferForm';
 import Offer from './components/Offer';
+import page from './css/index.css';
 
 const appState = new State();
 const appForm = new Form(appState);
@@ -22,27 +23,21 @@ appState.update({
     offer1: { isHid: false, parent: 'offerForm1', child: null },
     coverage1: { isHid: false, parent: 'coverageForm1', child: null }
   },
-  warranties: [
-    { id: 42, name: 'warrantiesName2' },
-    { id: 43, name: 'warrantiesName3' },
-    { id: 44, name: 'warrantiesName4' },
-    { id: 45, name: 'warrantiesName5' },
-    { id: 46, name: 'warrantiesName6' }
-  ],
+  warranties: [{ id: 'defaultId', name: 'defaultName', year: 'defaultYears' }],
   coverageDetails: [
     {
-      id: 42,
-      name: 'home shop silky sleep matress',
-      Active: 'Active',
-      OrderID: 'Order ID',
-      DateIssued: 'Date issued',
-      Expiration: 'Expiration',
-      Retailer: 'Retailer',
-      PlanDuration: 'Plan Duration',
-      Price: 'Price',
-      Claim: 'Claim',
-      PolicyDetails: 'Policy Details',
-      PolicyDocument: 'Policy Document'
+      id: 'defaultId',
+      name: 'defaultName',
+      Active: 'defaultActive',
+      OrderID: 'defaultOrderId',
+      DateIssued: 'defaultDateIssued',
+      Expiration: 'defaultExpiration',
+      Retailer: 'defaultIdRetailer',
+      PlanDuration: 'defaultIdPlanDuration',
+      Price: 'defaultPrice',
+      Claim: 'defaultClaim',
+      PolicyDetails: 'defaultPolicy Details',
+      PolicyDocument: 'defaultPolicyDocument'
     }
   ]
 });

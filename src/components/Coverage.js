@@ -1,4 +1,5 @@
 import Observer from '../lib/Observer';
+import page from '../css/index.css';
 
 class Coverage extends Observer {
   // eslint-disable-next-line class-methods-use-this
@@ -25,35 +26,60 @@ class Coverage extends Observer {
     //     ]
     //   : [];
     return !isHid
-      ? `${coverageDetails
-          .map(prop => {
-            return `<div ${hid} id=${i}>
-          <div class="col" > ${prop.name} <label>v</label></div>            
-          <div >
-            <div class="col">Active | Expires </div>
-            <div class="col">" "</div>
-            <div class="col">Order ID</div>
-            <div class="col">${prop.OrderID}</div>
-            <div class="col">Date issued</div>
-            <div class="col">${prop.DateIssued}</div>
-            <div class="col">Expiration</div>
-            <div class="col">${prop.Expiration}</div>
-            <div class="col">Retailer</div>
-            <div class="col">${prop.Retailer}</div>
-            <div class="col">Plan Duration</div>
-            <div class="col">${prop.PlanDuration}</div>
-            <div class="col">Price</div>
-            <div class="col">${prop.Price}</div>
-            <div class="col">Claim</div>
-            <div class="col">${prop.Claim}</div>
-            <div class="col">Policy Details</div>
-            <div class="col">${prop.PolicyDetails}</div>
-            <div class="col">Policy Document</div>
-            <div class="col">${prop.PolicyDocument}</div>
+      ? `<div class="row" ${hid} id='${i}'>
+      ${coverageDetails
+        .map((prop, indx) => {
+          return `<div class="column" ${hid} id='${`${i}-${indx}`}'>
+          <div class="row">
+            <div class="column"> ${prop.name}</div>
+            <div class="column"> v</div>
+          </div>        
+          <div class="row">
+            <div class="productContainer column">
+              <div class="row">  
+                <div class="column">Active | ${prop.Expiration} </div>
+              </div>
+              <div class="row">  
+                <div class="column">Order ID</div>
+                <div class="column">${prop.OrderID}</div>
+              </div>
+              <div class="row">  
+                <div class="column">Date issued</div>
+                <div class="column">${prop.DateIssued}</div>
+              </div>
+                <div class="row">  
+                  <div class="column">Expiration</div> 
+                  <div class="column">${prop.Expiration}</div>
+              </div>
+                <div class="row">  
+                  <div class="column">Retailer</div>
+                  <div class="column">${prop.Retailer}</div>
+              </div>
+                <div class="row">  
+                  <div class="column">Plan Duration</div>
+                  <div class="column">${prop.PlanDuration}</div>
+              </div>
+              <div class="row">  
+                <div class="column">Price</div>
+                <div class="column">${prop.Price}</div>
+              </div>
+              <div class="row">  
+                <div class="column">Claim</div>
+                <div class="column">${prop.Claim}</div>
+              </div>
+              <div class="row">  
+                <div class="column">Policy Details</div>
+                <div class="column">${prop.PolicyDetails}</div>
+              </div>
+              <div class="row">  
+                <div class="column">Policy Document</div>
+                <div class="column">${prop.PolicyDocument}</div>
+              </div>
+            </div>
           </div>
-        </div> `;
-          })
-          .join('\n')}`
+        </div>`;
+        })
+        .join('\n')}</div>`
       : ``;
   }
 

@@ -1,4 +1,5 @@
 import Observer from '../lib/Observer';
+// import page from '../css/index.css';
 
 class CoverageForm extends Observer {
   constructor(state) {
@@ -30,15 +31,17 @@ class CoverageForm extends Observer {
     //       }
     //     ]
     //   : [];
-    return `<div ${hid} id=${i}> 
-      <div>welcome Jason</div>
-      <div>Hope you are having a great day</div>
-      <div>Your products</div>
-      <div ${hid} id=${child}>
-        
-        </div>  
-        <button id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button>
-        <button id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button>
+    return `<div class="" ${hid} id=${i}> 
+      <div class="column">
+        <div class="row">welcome Jason</div>
+        <div class="row">Hope you are having a great day</div>
+        <div class="row">Your products</div>
+        <div class="row" ${hid} id=${child}>
+          
+          </div>  
+          <div class="row"><button id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button></div>
+          <div class="row"><button id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button></div>
+      </div>      
     </div>`;
   }
 
