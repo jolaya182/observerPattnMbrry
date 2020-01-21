@@ -67,6 +67,7 @@ class CoverageForm extends Observer {
       e.preventDefault();
       // // console.log('clicked claimBtn');
       console.log('send out the state', state);
+      alert('Your Claim Has Been Submitted');
     });
 
     cancelBtn.addEventListener('click', e => {
@@ -90,7 +91,7 @@ class CoverageForm extends Observer {
         const currProduct = currTar.parentNode.parentNode.parentNode;
         console.log('currTar.parent', currProduct);
 
-        if (ProductId === `c${currProduct.id}`) {
+        if (ProductId === `${currProduct.id}`) {
           console.log('foundPolicy', currProduct);
           const foundPolicy = `co${currTar.id}`;
           // console.log('found the input box', policies);
@@ -99,10 +100,10 @@ class CoverageForm extends Observer {
           visiblePolicyDetails[foundPolicy] = visiblePolicyDetails[foundPolicy]
             ? !visiblePolicyDetails[foundPolicy]
             : true;
-          // this.appState.update({
-          //   ...state,
-          //   visiblePolicyDetails
-          // });
+          this.appState.update({
+            ...state,
+            visiblePolicyDetails
+          });
         }
       }
 
