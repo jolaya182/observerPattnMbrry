@@ -28,7 +28,7 @@ class Coverage extends Observer {
     return !isHid
       ? `<div class='productContainer' ${hid} id=${i}>${coverageDetails
           .map(prop => {
-            return `<div class='rowOffer1 ' > 
+            return `<div class='rowOfferSpaceBtwn ' > 
             <div  class=' productName bold'>${prop.name}</div>  
             <div  class='vSymbol'>v</div> 
           </div>
@@ -37,52 +37,52 @@ class Coverage extends Observer {
 
           <div class='row'> 
             <label class='green bold'>Active </label> 
-            <div class='column'> | Expires ${prop.Expiration} </div>
+            <div class='column smallerText'> | Expires ${prop.Expiration} </div>
           </div>
 
           <div class='row'> 
             <div class='column'>Order ID</div>
-            <div class='column'>${prop.OrderID}</div>
+            <div class='column justBold'>${prop.OrderID}</div>
           </div>
 
           <div class='row'> 
             <div class='column'>Date issued</div>
-            <div class='column'>${prop.DateIssued}</div>
+            <div class='column justBold'>${prop.DateIssued}</div>
           </div>
           
           <div class='row'> 
             <div class='column'>Expiration</div>
-            <div class='column'>${prop.Expiration}</div>
+            <div class='column justBold'>${prop.Expiration}</div>
           </div>
           
           <div class='row'> 
             <div class='column'>Retailer</div>
-            <div class='column'>${prop.Retailer}</div>
+            <div class='column justBold'>${prop.Retailer}</div>
           </div>
           
           <div class='row'> 
             <div class='column'>Plan Duration</div>
-            <div class='column'>${prop.PlanDuration}</div>
+            <div class='column justBold'>${prop.PlanDuration}</div>
           </div>
           
           <div class='row'> 
             <div class='column'>Price</div>
-            <div class='column'>${prop.Price}</div>
+            <div class='column justBold'>${prop.Price}</div>
           </div>
           
           <div class='row'> 
             <div class='column'>Claim</div> 
-            <div class='column'>${prop.Claim}</div>
+            <div class='column justBold'>${prop.Claim}</div>
           </div>
          
           <div class='row'> 
-            <div class='column'>Policy Details</div>
-            <div class='column'>${prop.PolicyDetails}</div>
+            <div class='column '><a href='coverageForm1'class='justUnderLine'>*Policy Details</a></div>
+            <div class='column '><a href='coverageForm1' class='justUnderLine'>↓Policy Document</a></div>
           </div>
           
-          <div class='row'> 
-            <div class='column'>Policy Document</div>
-            <div class='column'>${prop.PolicyDocument}</div>
+          <div class='row '> 
+            <div class='column justBold  '>${prop.PolicyDetails}</div>
+            <div class='column justBold  '>${prop.PolicyDocument}</div>
           </div>
           
         </div>

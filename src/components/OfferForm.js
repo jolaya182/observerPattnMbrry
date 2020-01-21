@@ -17,12 +17,12 @@ class OfferForm extends Observer {
       productPrice = coverageDetails[0].productPrice;
     }
     // console.log('-->>isHid', isHid);
-    return `<div ${hid} id=${id}> 
+    return `<div ${hid} id=${id} class='OfferForm'}> 
         <div class="rowOfferLeft"><div class='productPrice'> $${productPrice} <label class='line-through'> $2000</label></div></div>
         <div class="rowOffer"><div class='bold'> <img src=${mbBedPic}> </div></div>    
         <div class="rowOfferLeft"><div class='bold'> Add Extended Protection</div></div>
         <div class="rowOfferLeft"><div class='smallerText'> Powered by <label class="darkPLtr">Mulberry</label> <a href="https://getmulberry.com/customers"class='underLine'> Learn More</a></div></div>
-        <div  ${hid} id=${child}>    
+        <div  class="rowOfferSpaceBtwn" ${hid} id=${child}>    
          
         </div> 
         <div class="rowOffer"><button class="rowOffer" id="offerFormBtnAddToCart" type='button'>Add to Cart </button></div>
@@ -45,6 +45,8 @@ class OfferForm extends Observer {
 
   bind(state, child) {
     const btn = document.getElementById('offerFormBtnAddToCart');
+    const offerFor = document.getElementById(this.id);
+    // ('labelPrplBackground')
 
     // console.log('btn', btn);
     btn.addEventListener('click', e => {
@@ -69,6 +71,30 @@ class OfferForm extends Observer {
           }
         }
       }
+    });
+
+    offerFor.addEventListener('click', e => {
+      const formElem = e.currentTarget;
+      // console.log('formElem', formElem);
+      const { childNodes } = formElem;
+      // console.log('childNodes', childNodes);
+      childNodes.forEach(node => {
+        // console.log('node', node);
+        if (node.id === 'offer1') {
+          const { elements } = node;
+          for (let indx = 0; indx < elements.length; indx += 1) {
+            // console.log('input', elements[indx]);
+            if (elements[indx].checked) {
+              // console.log('found the input box', elements[indx]);
+              this.appState.update({
+                ...this.appState.get(),
+                selectedWar: elements[indx].id
+              });
+              // console.log('state', this.appState.get());
+            }
+          }
+        }
+      });
     });
   }
 

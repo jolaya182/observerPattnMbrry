@@ -1,5 +1,4 @@
 .body{
-    /* display: flex; */
     height: 100%;
     font-family: sans-serif;
     margin:0;
@@ -24,7 +23,7 @@
 
 }
 
-.rowOffer1{
+.rowOfferSpaceBtwn{
     display: flex;
     flex-direction: row;
     flex-basis:100%;
@@ -65,15 +64,30 @@
     border: 1px solid;
     border-radius: 8px;
     color:white;
-    /* margin:auto; */
     padding: 10px;
-    /* display: flex; */
-    /* width:100%; */
-    /* align-items: center; */
+
+}
+
+#coverageFormBtnFileAClaim{
+    background-color: #5033B6;
+    border: 1px solid;
+    border-radius: 8px;
+    color:white;
+    padding: 10px;
+
+}
+
+#coverageFormBtnCancelWarranty{
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    color:black;
+    padding: 10px;
+
 }
 
 .productContainer{
-    background-color: ghostwhite;
+    background-color: white;
 }
 
 .darkPLtr{
@@ -88,18 +102,31 @@
     margin: 2.5px;
     padding: 10px;
 }
+
+.labelBackground{
+    margin: 2.5px;
+    padding: 10px;
+}
+
 .bold{
     font-weight: bolder;
     font-size: 15px;
 }
 
+.justBold{
+    font-weight: 600;
+}
 .underLine{
     font-weight: lighter;
     text-decoration: underline;
     color:black;
 
 }
-
+.justUnderLine{
+    font-weight: normal;
+    text-decoration: underline;
+    color: blue
+}
 .line-through{
     font-weight: lighter;
     text-decoration-line: line-through;
@@ -132,7 +159,7 @@
 .vSymbol{
     padding-left: 30px;
     padding-right: 30px;
-    color:#7D7E7E;
+    /* padding-top: 20px; */
     font-size: 20px;
     cursor: pointer;
 }
@@ -140,5 +167,9 @@
 .green{
     color: #33A507;
     padding-right: 5px ;
+}
+
+.hddn{
+    visibility:hidden;
 }
 

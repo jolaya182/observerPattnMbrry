@@ -6,15 +6,20 @@ class Offer extends Observer {
     // id should be the id from server
     const hid = isHid ? 'hidden' : '';
     // console.log('-->>isHid', isHid);
-    const { warranties } = state;
+    const { warranties, selectedWar } = state;
+    // console.log('selectedWar', selectedWar);
 
     return (
       warranties &&
       `<form ${hid} id=${i}>${warranties
         .map(war => {
-          return `<div class="rowOffer1 labelPrplBackground" >
+          const isSelected = selectedWar === `war-input-${war.id}`;
+          const isChecked = isSelected ? 'checked' : '';
+          return `<div class="rowOfferSpaceBtwn ${
+            isSelected ? 'labelPrplBackground' : 'labelBackground'
+          }" >
                   <div>
-                      <input id=${`war-input-${war.id}`} type='radio' value=${`war-input-${war.id}`}  name=${`war-input`} />
+                      <input id=${`war-input-${war.id}`} ${isChecked} type='radio' value=${`war-input-${war.id}`}  name=${`war-input`} />
                       <label for=${`war-input-${war.id}`}>${
             war.years
           } Year Protection Plan </label>

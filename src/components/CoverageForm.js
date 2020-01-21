@@ -21,8 +21,8 @@ class CoverageForm extends Observer {
     <div class='row' ${hid} id=${child}>
       
       </div>  
-      <div class='row productContainer'><button id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button></div>
-      <div class='row productContainer'><button id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button></div>
+      <div class='rowOffer productContainer'><button id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button></div>
+      <div class='rowOffer productContainer'><button id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button></div>
   </div>`;
   }
 
@@ -73,6 +73,8 @@ class CoverageForm extends Observer {
       e.preventDefault();
       console.log('clicked cancelBtn');
     });
+
+    // add event listener to child then find productContainer, then find the a that I clicked
   }
 
   update(state) {
