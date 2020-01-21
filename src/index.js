@@ -14,6 +14,7 @@ import CoverageForm from './components/CoverageForm';
 import Coverage from './components/Coverage';
 import OfferForm from './components/OfferForm';
 import Offer from './components/Offer';
+// eslint-disable-next-line no-unused-vars
 import page from './css/index.css';
 
 const appState = new State();
