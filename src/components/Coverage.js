@@ -1,22 +1,41 @@
+/* eslint-disable class-methods-use-this */
+/**
+ * title: Coverage.js
+ *
+ * date: 1/20/2020
+ *
+ * author: javier olaya
+ *
+ * description: this component handles the list of coverage details that will be displayed or hidden
+ */
 import Observer from '../lib/Observer';
 
+/**
+ *
+ *
+ * @class Coverage
+ * @extends {Observer}
+ */
 class Coverage extends Observer {
-  // eslint-disable-next-line class-methods-use-this
+  /**
+   * creates the dom element that this component will render
+   *
+   * @param {*} state
+   * @param {*} i
+   * @param {*} child
+   * @param {*} isHid
+   * @returns string
+   * @memberof Coverage
+   */
   createMarkup(state, i, child, isHid) {
     const hid = isHid ? 'hidden' : '';
-    // console.log('-->>isHid', isHid);
     const { coverageDetails, visibleProducts, visiblePolicyDetails } = state;
-    console.log('visiblePolicyDetails', visiblePolicyDetails);
 
     return !isHid
       ? `<form class='productContainer' ${hid} id=${i}>${coverageDetails
           .map((prop, indx) => {
             const currentId = `coverage1-${indx}`;
             const currentPolicyDetailId = `coverage-policy-details-${indx}`;
-            console.log(
-              '))) visiblePolicyDetails[currentPolicyDetailId] ',
-              visiblePolicyDetails[currentPolicyDetailId]
-            );
             return `<div  class='rowOfferSpaceBtwn ' > 
             <div id='overage1-${indx}' class=' productName bold'>${
               prop.name
@@ -68,7 +87,7 @@ class Coverage extends Observer {
             <div class='column justBold'>${prop.Claim}</div>
           </div>
          
-          <div class='row'> 
+          <div class='row' id=${`erage-policy-details-${indx}`}> 
             <div class='column policy'><label id=${`verage-policy-details-${indx}`} class='justUnderLine '>*Policy Details</label></div>
             <div class='column '><a href='coverageForm1' class='justUnderLine'>↓Policy Document</a></div>
           </div>
@@ -87,9 +106,15 @@ class Coverage extends Observer {
       : ``;
   }
 
+  /**
+   * will either append or update the a dom element
+   *
+   * @param {*} state
+   * @param {*} id
+   * @memberof Coverage
+   */
   render(state, id) {
     const renderingId = id || this.id;
-    // console.log('renderingId', renderingId);
     let offerMarkup = '';
     const { compIdPrnCh } = state;
     const { isHid, parent, child } = compIdPrnCh[renderingId];
@@ -97,6 +122,12 @@ class Coverage extends Observer {
     this.addMarkUp(id, id || parent, offerMarkup);
   }
 
+  /**
+   *  will either append or update the a dom element
+   *
+   * @param {*} state
+   * @memberof Coverage
+   */
   update(state) {
     this.render(state);
   }

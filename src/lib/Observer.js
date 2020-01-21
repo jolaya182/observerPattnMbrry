@@ -1,33 +1,49 @@
+/**
+ * title: Observer.js
+ *
+ * date: 1/20/2020
+ *
+ * author: javier olaya
+ *
+ * description: this class is used to update and display a component's data
+ */
+/**
+ *
+ *
+ * @class Observer
+ */
 class Observer {
-  //   update() {}
-  //   constructor() {
-  //     this.id = '';
-  //   }
+  // method only serves as reference since it will be overriden
+  // update() {}
+  // }
 
   id = '';
 
+  /**
+   * It will determine if the document fragment needs to be appended or
+   * replaced
+   *
+   * @param {*} id
+   * @param {*} parent
+   * @param {*} offerMarkup
+   * @memberof Observer
+   */
   addMarkUp(id, parent, offerMarkup) {
     const range = document.createRange();
     let frag = '';
     const appCont = document.getElementById(parent);
-    // console.log('^^^^ appCont', appCont);
     range.selectNode(appCont);
 
     frag = range.createContextualFragment(offerMarkup);
-    // console.log('offerMarkup', offerMarkup);
 
     if (id) {
       this.id = id;
-      // console.log('****OfferForm', frag);
       appCont.appendChild(frag);
     } else {
-      // console.log('this.id', this.id, 'appCont', appCont);
       const currentComp = document.getElementById(this.id);
       // if the component does not exist on the Dom then we
       // cannot replace the child
       if (currentComp) {
-        // console.log('***frag', frag);
-        // console.log('currentComp', currentComp);
         appCont.replaceChild(frag, currentComp);
       }
     }

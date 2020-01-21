@@ -1,13 +1,36 @@
+/* eslint-disable class-methods-use-this */
+/**
+ * title: Offer.js
+ *
+ * date: 1/20/2020
+ *
+ * author: javier olaya
+ *
+ * description: this component handles the list of warranties that will be displayed or hidden
+ */
 import Observer from '../lib/Observer';
 
+/**
+ *
+ *
+ * @class Offer
+ * @extends {Observer}
+ */
 class Offer extends Observer {
-  // eslint-disable-next-line class-methods-use-this
+  /**
+   * creates the dom element that this component will render
+   *
+   * @param {*} state
+   * @param {*} i
+   * @param {*} child
+   * @param {*} isHid
+   * @returns string
+   * @memberof Offer
+   */
   createMarkup(state, i, child, isHid) {
     // id should be the id from server
     const hid = isHid ? 'hidden' : '';
-    // console.log('-->>isHid', isHid);
     const { warranties, selectedWar } = state;
-    // console.log('selectedWar', selectedWar);
 
     return (
       warranties &&
@@ -35,9 +58,15 @@ class Offer extends Observer {
     );
   }
 
+  /**
+   * will either append or update the a dom element
+   *
+   * @param {*} state
+   * @param {*} id
+   * @memberof Offer
+   */
   render(state, id) {
     const renderingId = id || this.id;
-    // console.log('renderingId', renderingId);
     let offerMarkup = '';
     const { compIdPrnCh } = state;
     const { isHid, parent, child } = compIdPrnCh[renderingId];
@@ -45,6 +74,12 @@ class Offer extends Observer {
     this.addMarkUp(id, id || parent, offerMarkup);
   }
 
+  /**
+   * will bind the actions to the dom elements directly or through event delagation
+   *
+   * @param {*} state
+   * @memberof Offer
+   */
   update(state) {
     this.render(state);
   }

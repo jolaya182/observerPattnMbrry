@@ -1,4 +1,19 @@
 /* eslint-disable class-methods-use-this */
+/**
+ * title: Form.js
+ *
+ * date: 1/20/2020
+ *
+ * author: javier olaya
+ *
+ * description: this component handles the fetching/data processing aspect of the application and
+ * change of view(switch components)
+ */
+/**
+ *
+ *
+ * @class Form
+ */
 class Form {
   constructor(state) {
     this.appState = state;
@@ -10,6 +25,12 @@ class Form {
     console.log(msg, error);
   }
 
+  /**
+   * will send the data on a post method and invoke a
+   * callback func to process the data into the state application
+   *
+   * @memberof Form
+   */
   fetchData() {
     const data = {
       product: {
@@ -30,6 +51,7 @@ class Form {
 
     fetch(this.url, options)
       .then(
+        // eslint-disable-next-line consistent-return
         response => {
           if (response) return response.json();
         },
@@ -46,7 +68,6 @@ class Form {
           if (status >= 500 && status <= 599) {
             this.errMsg('error getting message, its our fault', status);
           }
-          console.log('success', json);
           this.processIncomingData(json);
         },
         error => this.errMsg('error from ', error)
@@ -54,6 +75,12 @@ class Form {
       .catch(err => console.log('error in sending fetch req', err));
   }
 
+  /**
+   * will gather necessary data from the fetch call to and update the state of the application
+   *
+   * @param {*} data
+   * @memberof Form
+   */
   processIncomingData(data) {
     const coverageDetails = [];
     const warranties = [];
@@ -92,52 +119,54 @@ class Form {
       coverageDetails,
       warranties
     });
-    console.log('state', this.appState.get());
-
-    // warranties: [
-    //   { id: 42, name: 'warrantiesName2' },
-    //   { id: 43, name: 'warrantiesName3' },
-    //   { id: 44, name: 'warrantiesName4' },
-    //   { id: 45, name: 'warrantiesName5' },
-    //   { id: 46, name: 'warrantiesName6' }
-    // ],
-    // coverageDetails: [
-    //   {
-    //     id: 42,
-    //     name: 'home shop silky sleep matress',
-    //     Active: 'Active',
-    //     OrderID: 'Order ID',
-    //     DateIssued: 'Date issued',
-    //     Expiration: 'Expiration',
-    //     Retailer: 'Retailer',
-    //     PlanDuration: 'Plan Duration',
-    //     Price: 'Price',
-    //     Claim: 'Claim',
-    //     PolicyDetails: 'Policy Details',
-    //     PolicyDocument: 'Policy Document'
-    //   }
-    // ]
-
-    // this.appState.update();
   }
 
+  /**
+   *
+   *
+   * @param {*} DateIssued
+   * @returns string
+   * @memberof Form
+   */
   getDateIssued(DateIssued) {
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     const da = new Date(DateIssued);
     return da.toLocaleDateString('en-Us', options);
   }
 
-  calculateExpirationDate(expDate, months) {
+  /**
+   * returns the expiration data based on the numbers of months it has a warranty and the date issued
+   *
+   * @param {*} DateIssued
+   * @param {*} months
+   * @returns string
+   * @memberof Form
+   */
+  calculateExpirationDate(DateIssued, months) {
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    const da = new Date(expDate);
+    const da = new Date(DateIssued);
     da.setMonth(da.getMonth() + months);
     return da.toLocaleDateString('en-Us', options);
   }
 
+  /**
+   * calculates the number of years the warranty covers based on the
+   * number of months
+   *
+   * @param {*} months
+   * @returns number
+   * @memberof Form
+   */
   getYears(months) {
     return months / 12 < 1 ? Math.ceil(months / 12) : Math.floor(months / 12);
   }
 
+  /**
+   * creates the dom element that this component will render
+   *
+   * @returns string
+   * @memberof Form
+   */
   createMarkup() {
     // get a list of all the observables
     // and then say render according to the current component
@@ -145,23 +174,27 @@ class Form {
     const { formId } = state;
 
     return `<div  id=${formId}>
-    <div>  Picture</div>
+    <div>  </div>
     <button class='rowOffer' id="switchComponent" type="button"> Switch Component </button>
   </div>`;
   }
 
+  /**
+   * will either append or update the a dom element
+   *
+   * @param {*} id
+   * @param {string} [app='app']
+   * @memberof Form
+   */
   render(id, app = 'app') {
     // if (!id) id = this.id;
     const state = this.appState.get();
-    // console.log('formiD---->', id || this.id);
     this.appState.update({
       ...state,
       formId: id || this.id
     });
     const offerMarkup = this.createMarkup(this.appState.get(), this.id);
 
-    // const parent = document.getElementById('app');
-    // parent.innerHTML = markUp;
     if (id) {
       this.id = id;
       const appCon = document.getElementById(app);
@@ -173,7 +206,6 @@ class Form {
     } else {
       // replace it with a new html element
       const currentComp = document.getElementById(this.id);
-      // console.log('replace this.id', this.id, 'currentComp', currentComp);
       const { parentNode } = currentComp;
       const range = document.createRange();
       range.selectNode(currentComp);
@@ -185,24 +217,25 @@ class Form {
     this.bind();
   }
 
+  /**
+   * will bind the actions to the dom elements directly or through event delagation
+   *
+   * @memberof Form
+   */
   bind() {
     const state = this.appState.get();
     const { formId, compIdPrnCh } = state;
     let { currComponent } = state;
 
-    const form = document.getElementById(formId);
     window.addEventListener('load', e => {
       e.preventDefault();
-      console.log('loading done');
       this.fetchData();
     });
     // set listeners to change the current components
     const formNodes = document.getElementById(formId).childNodes;
-    // console.log('form --pppp', form);
     let newCompIdPrnCh = {};
     formNodes[3].addEventListener('click', e => {
       e.preventDefault();
-      // console.log('clicked on submision');
       if (currComponent === 'offerForm1') {
         const { parent, child } = compIdPrnCh.offerForm1;
         const parent1 = compIdPrnCh.coverageForm1.parent;
@@ -218,7 +251,6 @@ class Form {
         const { parent, child } = compIdPrnCh.offerForm1;
         const parent1 = compIdPrnCh.coverageForm1.parent;
         const child1 = compIdPrnCh.coverageForm1.child;
-        console.log('clicked on coverageForm1');
 
         newCompIdPrnCh = {
           ...compIdPrnCh,

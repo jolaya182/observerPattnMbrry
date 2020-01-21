@@ -1,3 +1,13 @@
+/**
+ * title: index.js
+ *
+ * date: 1/20/2020
+ *
+ * author: javier olaya
+ *
+ * description: this index handles the inital rendering of the dom elements on the page
+ * and the addition of the observerables to the state object
+ */
 import State from './lib/State';
 import Form from './components/Form';
 import CoverageForm from './components/CoverageForm';
@@ -52,6 +62,3 @@ appState.addObserver(offer);
 appState.addObserver(coverage);
 appState.addObserver(coverageForm);
 appState.addObserver(offerForm);
-
-// appForm.render();
-// appState.update({ warranties: [{ id: 1, name: 'Jane' }] });
