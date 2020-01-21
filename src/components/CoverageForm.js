@@ -21,8 +21,8 @@ class CoverageForm extends Observer {
     <div class='row' ${hid} id=${child}>
       
       </div>  
-      <div class='rowOffer productContainer'><button id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button></div>
-      <div class='rowOffer productContainer'><button id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button></div>
+      <div class='rowOffer productContainer'><button class='rowOffer' id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button></div>
+      <div class='rowOffer productContainer'><button class='rowOffer' id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button></div>
   </div>`;
   }
 
@@ -55,14 +55,14 @@ class CoverageForm extends Observer {
     //   console.log('***currentId', frag);
     //   appCont.replaceChild(frag, currentComp);
     // }
-    if (!isHid) this.bind(state);
+    if (!isHid) this.bind(state, child);
   }
 
   // eslint-disable-next-line class-methods-use-this
-  bind(state) {
+  bind(state, child) {
     const claimBtn = document.getElementById('coverageFormBtnFileAClaim');
     const cancelBtn = document.getElementById('coverageFormBtnCancelWarranty');
-
+    const coverageForm = document.getElementById(this.id);
     claimBtn.addEventListener('click', e => {
       e.preventDefault();
       // // console.log('clicked claimBtn');
@@ -74,7 +74,50 @@ class CoverageForm extends Observer {
       console.log('clicked cancelBtn');
     });
 
-    // add event listener to child then find productContainer, then find the a that I clicked
+    // event delegation added to find the selected product
+    // add event listener to child then find productContainer
+    coverageForm.addEventListener('click', e => {
+      const formElem = e.currentTarget;
+      const currTar = e.target;
+      const { childNodes } = document.querySelector('.productContainer');
+      const policies = document.querySelector('.policy').childNodes;
+
+      console.log('policies', policies);
+      console.log('currTar', currTar);
+      for (let ix = 0; ix < policies.length; ix = +1) {
+        if (policies[ix].id === `${currTar.id}`) {
+          const foundPolicy = `co${policies[ix].id}`;
+          console.log('foundPolicy', foundPolicy);
+          // console.log('found the input box', policies);
+          // const { state } = this.appState.get();
+          const { visiblePolicyDetails } = state;
+          visiblePolicyDetails[foundPolicy] = visiblePolicyDetails[foundPolicy]
+            ? !visiblePolicyDetails[foundPolicy]
+            : true;
+          this.appState.update({
+            ...state,
+            visiblePolicyDetails
+          });
+        }
+      }
+
+      console.log('childNodes', childNodes);
+      for (let ix = 0; ix < childNodes.length; ix += 1) {
+        console.log('childNodes', childNodes[ix]);
+        if (childNodes[ix].id === `c${currTar.id}`) {
+          console.log('found the node');
+          const foundProduct = childNodes[ix].id;
+          const { visibleProducts } = state;
+          visibleProducts[foundProduct] = visibleProducts[foundProduct]
+            ? !visibleProducts[foundProduct]
+            : true;
+          this.appState.update({
+            ...state,
+            visibleProducts
+          });
+        }
+      }
+    });
   }
 
   update(state) {
@@ -83,3 +126,59 @@ class CoverageForm extends Observer {
 }
 
 export default CoverageForm;
+
+const policies = document.querySelectorAll('.policy');
+
+// console.log('policy', policies);
+// for (let ix = 0; ix < policies.length; ix = +1) {
+//   if (policies[ix].id === `cov${currTar.id}`) {
+//     const foundPolicy = policies[ix].id;
+//     console.log('foundPolicy', foundPolicy);
+//     // console.log('found the input box', policies);
+//     // const { state } = this.appState.get();
+//     const { visiblePolicyDetails } = state;
+//     visiblePolicyDetails[foundPolicy] = visiblePolicyDetails[foundPolicy]
+//       ? !visiblePolicyDetails[foundPolicy]
+//       : true;
+
+//     // this.appState.update({
+//     //   ...state,
+//     //   visiblePolicyDetails
+//     // });
+//   }
+// }
+
+// console.log('currTar', currTar.id);
+// // console.log('formElem', formElem);
+// const { childNodes } = formElem;
+// // console.log('childNodes', childNodes);
+// childNodes.forEach(node => {
+//   console.log('node', node);
+//   if (node.id === child) {
+//     const elements = node.childNodes;
+//     console.log('elements', elements);
+//     for (let indx = 0; indx < elements.length; indx += 1) {
+//       // console.log('input', elements[indx]);
+//       console.log(
+//         'elements[indx].id === currTar',
+//         elements[indx].id,
+//         currTar.id
+//       );
+//       if (elements[indx].id === `c${currTar.id}`) {
+//         const foundProduct = elements[indx].id;
+//         console.log('foundProduct', foundProduct);
+//         // console.log('found the input box', elements[indx]);
+//         // const { state } = this.appState.get();
+//         const { visibleProducts } = state;
+//         visibleProducts[foundProduct] = visibleProducts[foundProduct]
+//           ? !visibleProducts[foundProduct]
+//           : true;
+
+//         this.appState.update({
+//           ...state,
+//           visibleProducts
+//         });
+//       }
+//     }
+//   }
+// });

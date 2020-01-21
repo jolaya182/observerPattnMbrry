@@ -5,6 +5,9 @@
     padding: 0;
     background-color: #F6F7FB;
 }
+#app{
+    margin: 10px;
+}
 
 .row{
     display: flex;
@@ -77,6 +80,14 @@
 
 }
 
+#switchComponent{
+    background-color: #5033B6;
+    border: 1px solid;
+    border-radius: 8px;
+    color:white;
+    padding: 10px;
+}
+
 #coverageFormBtnCancelWarranty{
     background-color: white;
     border: 1px solid white;
@@ -88,6 +99,7 @@
 
 .productContainer{
     background-color: white;
+    margin: 10px;
 }
 
 .darkPLtr{
@@ -125,7 +137,8 @@
 .justUnderLine{
     font-weight: normal;
     text-decoration: underline;
-    color: blue
+    color: blue;
+    cursor: pointer;
 }
 .line-through{
     font-weight: lighter;
@@ -160,7 +173,7 @@
     padding-left: 30px;
     padding-right: 30px;
     /* padding-top: 20px; */
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
 }
 
@@ -170,6 +183,10 @@
 }
 
 .hddn{
-    visibility:hidden;
+    visibility:collapse;
+    height: 0;
 }
 
+.visibl{
+    visibility:visible;
+}

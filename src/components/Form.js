@@ -68,7 +68,7 @@ class Form {
           war.created_date,
           war.duration_months
         ),
-        Retailer: war.product.retailer.company_name,
+        Retailer: war.product.retailer.company_name || 'Home Shop',
         PlanDuration: war.duration_months,
         Price: war.customer_cost,
         Claim: 0,
@@ -146,7 +146,7 @@ class Form {
 
     return `<div  id=${formId}>
     <div>  Picture</div>
-    <button type="button"> switch Component </button>
+    <button class='rowOffer' id="switchComponent" type="button"> Switch Component </button>
   </div>`;
   }
 

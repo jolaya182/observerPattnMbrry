@@ -18,8 +18,8 @@ appState.update({
   ...appState.get(),
   compIdPrnCh: {
     WarForm: { isHid: false, parent: 'app', child: 'offerForm1' },
-    offerForm1: { isHid: false, parent: 'WarForm', child: 'offer1' },
-    coverageForm1: { isHid: true, parent: 'WarForm', child: 'coverage1' },
+    offerForm1: { isHid: true, parent: 'WarForm', child: 'offer1' },
+    coverageForm1: { isHid: false, parent: 'WarForm', child: 'coverage1' },
     offer1: { isHid: false, parent: 'offerForm1', child: null },
     coverage1: { isHid: false, parent: 'coverageForm1', child: null }
   },

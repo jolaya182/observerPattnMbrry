@@ -33,10 +33,10 @@ class OfferForm extends Observer {
     const renderingId = id || this.id;
     let offerMarkup = '';
     const { compIdPrnCh } = state;
-    const { isHid, parent, child } = compIdPrnCh[id || this.id];
+    const { isHid, parent, child } = compIdPrnCh[renderingId];
     // console.log('isHid', isHid);
 
-    offerMarkup = this.createMarkup(state, id || this.id, child, isHid);
+    offerMarkup = this.createMarkup(state, renderingId, child, isHid);
 
     this.addMarkUp(id, parent, offerMarkup);
 
@@ -68,11 +68,13 @@ class OfferForm extends Observer {
               'send out state',
               state
             );
+            alert('Warranty Added To The Cart');
           }
         }
       }
     });
 
+    // event delegation added to find the selected warranty
     offerFor.addEventListener('click', e => {
       const formElem = e.currentTarget;
       // console.log('formElem', formElem);
@@ -80,7 +82,7 @@ class OfferForm extends Observer {
       // console.log('childNodes', childNodes);
       childNodes.forEach(node => {
         // console.log('node', node);
-        if (node.id === 'offer1') {
+        if (node.id === child) {
           const { elements } = node;
           for (let indx = 0; indx < elements.length; indx += 1) {
             // console.log('input', elements[indx]);

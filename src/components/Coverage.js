@@ -1,39 +1,32 @@
 import Observer from '../lib/Observer';
-import page from '../css/index.css';
 
 class Coverage extends Observer {
   // eslint-disable-next-line class-methods-use-this
   createMarkup(state, i, child, isHid) {
     const hid = isHid ? 'hidden' : '';
     // console.log('-->>isHid', isHid);
-    const { coverageDetails } = state;
-    // const warranties = true
-    //   ? [
-    //       {
-    //         id: 42,
-    //         name: 'home shop silky sleep matress',
-    //         Active: 'Active',
-    //         OrderID: 'Order ID',
-    //         DateIssued: 'Date issued',
-    //         Expiration: 'Expiration',
-    //         Retailer: 'Retailer',
-    //         PlanDuration: 'Plan Duration',
-    //         Price: 'Price',
-    //         Claim: 'Claim',
-    //         PolicyDetails: 'Policy Details',
-    //         PolicyDocument: 'Policy Document'
-    //       }
-    //     ]
-    //   : [];
+    const { coverageDetails, visibleProducts, visiblePolicyDetails } = state;
+    console.log('visiblePolicyDetails', visiblePolicyDetails);
+
     return !isHid
-      ? `<div class='productContainer' ${hid} id=${i}>${coverageDetails
-          .map(prop => {
-            return `<div class='rowOfferSpaceBtwn ' > 
-            <div  class=' productName bold'>${prop.name}</div>  
-            <div  class='vSymbol'>v</div> 
+      ? `<form class='productContainer' ${hid} id=${i}>${coverageDetails
+          .map((prop, indx) => {
+            const currentId = `coverage1-${indx}`;
+            const currentPolicyDetailId = `coverage-policy-details-${indx}`;
+            console.log(
+              '))) visiblePolicyDetails[currentPolicyDetailId] ',
+              visiblePolicyDetails[currentPolicyDetailId]
+            );
+            return `<div  class='rowOfferSpaceBtwn ' > 
+            <div id='overage1-${indx}' class=' productName bold'>${
+              prop.name
+            }</div>  
+            <div  class='vSymbol darkPLtr'>v</div> 
           </div>
 
-        <div class='coverageDetalContainer column'>
+        <div id=${currentId} class='coverageDetalContainer column ${
+              visibleProducts[currentId] ? 'visibl' : 'hddn'
+            }' >
 
           <div class='row'> 
             <label class='green bold'>Active </label> 
@@ -76,19 +69,21 @@ class Coverage extends Observer {
           </div>
          
           <div class='row'> 
-            <div class='column '><a href='coverageForm1'class='justUnderLine'>*Policy Details</a></div>
+            <div class='column policy'><label id=${`verage-policy-details-${indx}`} class='justUnderLine '>*Policy Details</label></div>
             <div class='column '><a href='coverageForm1' class='justUnderLine'>↓Policy Document</a></div>
           </div>
           
-          <div class='row '> 
-            <div class='column justBold  '>${prop.PolicyDetails}</div>
-            <div class='column justBold  '>${prop.PolicyDocument}</div>
+          <div class='row  '> 
+            <div id=${currentPolicyDetailId} class='column justBold  ${
+              visiblePolicyDetails[currentPolicyDetailId] ? 'visibl' : 'hddn'
+            }'>${prop.PolicyDetails}</div>
+            
           </div>
           
         </div>
        `;
           })
-          .join('\n')}</div>`
+          .join('\n')}</form>`
       : ``;
   }
 
@@ -103,8 +98,6 @@ class Coverage extends Observer {
   }
 
   update(state) {
-    // console.log('state warranty3', state);
-
     this.render(state);
   }
 }
