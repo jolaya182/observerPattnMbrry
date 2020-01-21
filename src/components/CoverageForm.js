@@ -80,24 +80,29 @@ class CoverageForm extends Observer {
       const formElem = e.currentTarget;
       const currTar = e.target;
       const { childNodes } = document.querySelector('.productContainer');
-      const policies = document.querySelector('.policy').childNodes;
-
-      console.log('policies', policies);
+      // const policies = document.querySelector('.productContainer').childNodes;
+      let foundProduct = '';
+      console.log('policies', childNodes);
       console.log('currTar', currTar);
-      for (let ix = 0; ix < policies.length; ix = +1) {
-        if (policies[ix].id === `${currTar.id}`) {
-          const foundPolicy = `co${policies[ix].id}`;
-          console.log('foundPolicy', foundPolicy);
+      for (let ix = 0; ix < childNodes.length; ix += 1) {
+        console.log('childNodes', childNodes[ix].id);
+        const ProductId = childNodes[ix].id;
+        const currProduct = currTar.parentNode.parentNode.parentNode;
+        console.log('currTar.parent', currProduct);
+
+        if (ProductId === `c${currProduct.id}`) {
+          console.log('foundPolicy', currProduct);
+          const foundPolicy = `co${currTar.id}`;
           // console.log('found the input box', policies);
           // const { state } = this.appState.get();
           const { visiblePolicyDetails } = state;
           visiblePolicyDetails[foundPolicy] = visiblePolicyDetails[foundPolicy]
             ? !visiblePolicyDetails[foundPolicy]
             : true;
-          this.appState.update({
-            ...state,
-            visiblePolicyDetails
-          });
+          // this.appState.update({
+          //   ...state,
+          //   visiblePolicyDetails
+          // });
         }
       }
 
@@ -106,7 +111,7 @@ class CoverageForm extends Observer {
         console.log('childNodes', childNodes[ix]);
         if (childNodes[ix].id === `c${currTar.id}`) {
           console.log('found the node');
-          const foundProduct = childNodes[ix].id;
+          foundProduct = childNodes[ix].id;
           const { visibleProducts } = state;
           visibleProducts[foundProduct] = visibleProducts[foundProduct]
             ? !visibleProducts[foundProduct]
