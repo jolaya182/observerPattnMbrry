@@ -23,38 +23,41 @@ class Offer extends Observer {
    * @param {*} state
    * @param {*} i
    * @param {*} child
-   * @param {*} isHid
+   * @param {*} isHidden
    * @returns string
    * @memberof Offer
    */
-  createMarkup(state, i, child, isHid) {
+  createMarkup(state, i, child, isHidden) {
     // id should be the id from server
-    const hid = isHid ? 'hidden' : '';
-    const { warranties, selectedWar } = state;
+    const hid = isHidden ? 'hidden' : '';
+    const { warranties, selectedWarranty } = state;
 
     return (
       warranties &&
       `<form ${hid} id=${i}>${warranties
         .map(war => {
-          const isSelected = selectedWar === `war-input-${war.id}`;
-          const isChecked = isSelected ? 'checked' : '';
-          return `<div class="rowOfferSpaceBtwn ${
-            isSelected ? 'labelPrplBackground' : 'labelBackground'
-          }" >
-                  <div>
-                      <input id=${`war-input-${war.id}`} ${isChecked} type='radio' value=${`war-input-${war.id}`}  name=${`war-input`} />
-                      <label for=${`war-input-${war.id}`}>${
+          const isWarrantySelected = selectedWarranty === `war-input-${war.id}`;
+          const isChecked = isWarrantySelected ? 'checked' : '';
+          /* eslint-disable */
+          return `
+          <div class="rowOfferSpaceBtwn ${
+            isWarrantySelected ? 'labelPrplBackground' : 'labelBackground'
+          }">
+            <div>
+                <input id=${`war-input-${war.id}`} ${isChecked} type='radio' value=${`war-input-${war.id}`}  name=${`war-input`} />
+                <label for=${`war-input-${war.id}`}>${
             war.years
           } Year Protection Plan </label>
-                  </div>
-                  <div>    
-                      <div class='bold' id=${`war-input-${war.id}`}>$${
+            </div>
+            <div>    
+              <div class='bold' id=${`war-input-${war.id}`}> $${
             war.price
           } </div>
-                      </div>
-                  </div>`;
+            </div>
+          </div>`;
         })
         .join('\n')}</form>`
+      /* eslint-enable */
     );
   }
 
@@ -66,12 +69,18 @@ class Offer extends Observer {
    * @memberof Offer
    */
   render(state, id) {
-    const renderingId = id || this.id;
-    let offerMarkup = '';
-    const { compIdPrnCh } = state;
-    const { isHid, parent, child } = compIdPrnCh[renderingId];
-    offerMarkup = this.createMarkup(state, renderingId, child, isHid);
-    this.addMarkUp(id, id || parent, offerMarkup);
+    const offerComponentId = id || this.id;
+    const { componentIdParentChild } = state;
+    const { isHidden, parent, child } = componentIdParentChild[
+      offerComponentId
+    ];
+    const componentMarkup = this.createMarkup(
+      state,
+      offerComponentId,
+      child,
+      isHidden
+    );
+    this.addMarkUp(id, id || parent, componentMarkup);
   }
 
   /**

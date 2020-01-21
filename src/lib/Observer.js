@@ -25,16 +25,15 @@ class Observer {
    *
    * @param {*} id
    * @param {*} parent
-   * @param {*} offerMarkup
+   * @param {*} componentMarkup
    * @memberof Observer
    */
-  addMarkUp(id, parent, offerMarkup) {
+  addMarkUp(id, parent, componentMarkup) {
     const range = document.createRange();
-    let frag = '';
     const appCont = document.getElementById(parent);
     range.selectNode(appCont);
 
-    frag = range.createContextualFragment(offerMarkup);
+    const frag = range.createContextualFragment(componentMarkup);
 
     if (id) {
       this.id = id;

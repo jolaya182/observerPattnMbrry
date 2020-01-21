@@ -44,14 +44,14 @@ class Subject {
   }
 
   /**
-   * goes throug all observable and inovoke the update method on
+   * goes through all the observable and inovoke the update method on
    * each one of them
    *
    * @param {*} state
    * @memberof Subject
    */
   notify(state) {
-    const { compIdPrnCh } = state;
+    const { componentIdParentChild } = state;
     if (this.observers.length > 0) {
       // we must update exact the parent elem on the dom first
       // so it can exist and therefore render
@@ -60,7 +60,7 @@ class Subject {
       // eslint-disable-next-line array-callback-return
       const chldrn = this.observers.filter(obs => {
         obs.update(state);
-        if (!compIdPrnCh[obs.id].child) {
+        if (!componentIdParentChild[obs.id].child) {
           return obs;
         }
         obs.update(state);

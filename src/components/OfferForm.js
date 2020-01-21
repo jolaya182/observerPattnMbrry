@@ -30,19 +30,21 @@ class OfferForm extends Observer {
    * @param {*} state
    * @param {*} id
    * @param {*} child
-   * @param {*} isHid
+   * @param {*} isHidden
    * @returns string
    * @memberof OfferForm
    */
-  createMarkup(state, id, child, isHid) {
+  createMarkup(state, id, child, isHidden) {
     // id should be the id from server
-    const hid = isHid ? 'hidden' : '';
+    const hid = isHidden ? 'hidden' : '';
     const { coverageDetails } = state;
     let productPrice = 'Product Price';
     if (coverageDetails && coverageDetails[0].productPrice) {
       productPrice = coverageDetails[0].productPrice;
     }
-    return `<div ${hid} id=${id} class='OfferForm'}> 
+
+    return `
+    <div ${hid} id=${id} class='OfferForm'}> 
         <div class="rowOfferLeft"><div class='productPrice'> $${productPrice} <label class='line-through'> $2000</label></div></div>
         <div class="rowOffer"><div class='bold'> <img src=${mbBedPic}> </div></div>    
         <div class="rowOfferLeft"><div class='bold'> Add Extended Protection</div></div>
@@ -50,7 +52,7 @@ class OfferForm extends Observer {
         <div  class="rowOfferSpaceBtwn" ${hid} id=${child}>    
          
         </div> 
-        <div class="rowOffer"><button class="rowOffer" id="offerFormBtnAddToCart" type='button'>Add to Cart </button></div>
+      <div class="rowOffer"><button class="rowOffer" id="offerFormBtnAddToCart" type='button'>Add to Cart </button></div>
     </div>`;
   }
 
@@ -62,16 +64,22 @@ class OfferForm extends Observer {
    * @memberof OfferForm
    */
   render(state, id) {
-    const renderingId = id || this.id;
-    let offerMarkup = '';
-    const { compIdPrnCh } = state;
-    const { isHid, parent, child } = compIdPrnCh[renderingId];
+    const offerFormComponentId = id || this.id;
+    const { componentIdParentChild } = state;
+    const { isHidden, parent, child } = componentIdParentChild[
+      offerFormComponentId
+    ];
 
-    offerMarkup = this.createMarkup(state, renderingId, child, isHid);
+    const componentMarkup = this.createMarkup(
+      state,
+      offerFormComponentId,
+      child,
+      isHidden
+    );
 
-    this.addMarkUp(id, parent, offerMarkup);
+    this.addMarkUp(id, parent, componentMarkup);
 
-    if (!isHid) this.bind(state, child);
+    if (!isHidden) this.bind(state, child);
   }
 
   /**
@@ -82,14 +90,16 @@ class OfferForm extends Observer {
    * @memberof OfferForm
    */
   bind(state, child) {
-    const btn = document.getElementById('offerFormBtnAddToCart');
-    const offerFor = document.getElementById(this.id);
+    const AddToCartButton = document.getElementById('offerFormBtnAddToCart');
+    const offerFormComponent = document.getElementById(this.id);
 
-    btn.addEventListener('click', e => {
+    AddToCartButton.addEventListener('click', e => {
       e.preventDefault();
-      const offerF = document.getElementById(this.id);
-      const childComp = offerF.childNodes[9]; // get the component that will be swapped
+      // get the component that will be swapped
+      const childComp = offerFormComponent.childNodes[9];
+      // checks if the clicked element is the offer component
       if (childComp.id === child) {
+        // these are the form elements
         // if the child component exists then get the selected radio info
         const { elements } = childComp;
         for (let i = 0; i < elements.length; i += 1) {
@@ -107,17 +117,19 @@ class OfferForm extends Observer {
     });
 
     // event delegation added to find the selected warranty
-    offerFor.addEventListener('click', e => {
+    offerFormComponent.addEventListener('click', e => {
+      // go through all the target's nodes and find the checked radio
       const formElem = e.currentTarget;
       const { childNodes } = formElem;
       childNodes.forEach(node => {
         if (node.id === child) {
+          // these are the form elements
           const { elements } = node;
           for (let indx = 0; indx < elements.length; indx += 1) {
             if (elements[indx].checked) {
               this.appState.update({
                 ...this.appState.get(),
-                selectedWar: elements[indx].id
+                selectedWarranty: elements[indx].id
               });
             }
           }

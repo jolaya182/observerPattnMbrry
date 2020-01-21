@@ -29,12 +29,12 @@ class CoverageForm extends Observer {
    * @param {*} state
    * @param {*} i
    * @param {*} child
-   * @param {*} isHid
+   * @param {*} isHidden
    * @returns string
    * @memberof CoverageForm
    */
-  createMarkup(state, i, child, isHid) {
-    const hid = isHid ? 'hidden' : '';
+  createMarkup(state, i, child, isHidden) {
+    const hid = isHidden ? 'hidden' : '';
 
     return `<div ${hid} id=${i}> 
     <div class='row'><label class='welcome bold'>Welcome Jason!</label></div>
@@ -56,15 +56,21 @@ class CoverageForm extends Observer {
    * @memberof CoverageForm
    */
   render(state, id) {
-    const renderingId = id || this.id;
-    let offerMarkup = '';
-    const { compIdPrnCh } = state;
-    const { isHid, parent, child } = compIdPrnCh[renderingId];
+    const coverageFormComponentId = id || this.id;
+    const { componentIdParentChild } = state;
+    const { isHidden, parent, child } = componentIdParentChild[
+      coverageFormComponentId
+    ];
 
-    offerMarkup = this.createMarkup(state, renderingId, child, isHid);
+    const componentMarkup = this.createMarkup(
+      state,
+      coverageFormComponentId,
+      child,
+      isHidden
+    );
 
-    this.addMarkUp(id, parent, offerMarkup);
-    if (!isHid) this.bind(state);
+    this.addMarkUp(id, parent, componentMarkup);
+    if (!isHidden) this.bind(state);
   }
 
   /**
@@ -77,27 +83,44 @@ class CoverageForm extends Observer {
     const claimBtn = document.getElementById('coverageFormBtnFileAClaim');
     const cancelBtn = document.getElementById('coverageFormBtnCancelWarranty');
     const coverageForm = document.getElementById(this.id);
+
+    // trigger the claim button of the coverage form
     claimBtn.addEventListener('click', e => {
       e.preventDefault();
       console.log('send out the state', state);
       alert('Your Claim Has Been Submitted');
     });
 
+    // trigger the cancel button of the coverage form
     cancelBtn.addEventListener('click', e => {
       e.preventDefault();
+      alert(' Claim Has Been canceled');
     });
 
-    // event delegation added to find the selected product
-    // add event listener to child then find productContainer
+    // add event listeners to track the components by using event delegation
+    // to find the selected product or long policy details
     coverageForm.addEventListener('click', e => {
       const currTar = e.target;
       const { childNodes } = document.querySelector('.productContainer');
-      // const policies = document.querySelector('.productContainer').childNodes;
       let foundProduct = '';
+
       for (let ix = 0; ix < childNodes.length; ix += 1) {
         const ProductId = childNodes[ix].id;
+        // on the coverage form, find the product clicked
+        if (ProductId === `c${currTar.id}`) {
+          foundProduct = ProductId;
+          const { visibleProducts } = state;
+          visibleProducts[foundProduct] = visibleProducts[foundProduct]
+            ? !visibleProducts[foundProduct]
+            : true;
+          this.appState.update({
+            ...state,
+            visibleProducts
+          });
+          return;
+        }
         const currProduct = currTar.parentNode.parentNode.parentNode;
-
+        // if product was not clicked then find the long policy clicked
         if (ProductId === `${currProduct.id}`) {
           const foundPolicy = `co${currTar.id}`;
           const { visiblePolicyDetails } = state;
@@ -108,20 +131,7 @@ class CoverageForm extends Observer {
             ...state,
             visiblePolicyDetails
           });
-        }
-      }
-
-      for (let ix = 0; ix < childNodes.length; ix += 1) {
-        if (childNodes[ix].id === `c${currTar.id}`) {
-          foundProduct = childNodes[ix].id;
-          const { visibleProducts } = state;
-          visibleProducts[foundProduct] = visibleProducts[foundProduct]
-            ? !visibleProducts[foundProduct]
-            : true;
-          this.appState.update({
-            ...state,
-            visibleProducts
-          });
+          return;
         }
       }
     });

@@ -193,7 +193,7 @@ class Form {
       ...state,
       formId: id || this.id
     });
-    const offerMarkup = this.createMarkup(this.appState.get(), this.id);
+    const componentMarkup = this.createMarkup(this.appState.get(), this.id);
 
     if (id) {
       this.id = id;
@@ -201,7 +201,7 @@ class Form {
 
       const range = document.createRange();
       range.selectNode(appCon);
-      const frag = range.createContextualFragment(offerMarkup);
+      const frag = range.createContextualFragment(componentMarkup);
       appCon.appendChild(frag);
     } else {
       // replace it with a new html element
@@ -209,7 +209,7 @@ class Form {
       const { parentNode } = currentComp;
       const range = document.createRange();
       range.selectNode(currentComp);
-      const frag = range.createContextualFragment(offerMarkup);
+      const frag = range.createContextualFragment(componentMarkup);
 
       parentNode.replaceChild(frag, currentComp);
     }
@@ -224,7 +224,7 @@ class Form {
    */
   bind() {
     const state = this.appState.get();
-    const { formId, compIdPrnCh } = state;
+    const { formId, componentIdParentChild } = state;
     let { currComponent } = state;
 
     window.addEventListener('load', e => {
@@ -233,36 +233,36 @@ class Form {
     });
     // set listeners to change the current components
     const formNodes = document.getElementById(formId).childNodes;
-    let newCompIdPrnCh = {};
+    let newcomponentIdParentChild = {};
     formNodes[3].addEventListener('click', e => {
       e.preventDefault();
       if (currComponent === 'offerForm1') {
-        const { parent, child } = compIdPrnCh.offerForm1;
-        const parent1 = compIdPrnCh.coverageForm1.parent;
-        const child1 = compIdPrnCh.coverageForm1.child;
+        const { parent, child } = componentIdParentChild.offerForm1;
+        const parent1 = componentIdParentChild.coverageForm1.parent;
+        const child1 = componentIdParentChild.coverageForm1.child;
 
-        newCompIdPrnCh = {
-          ...compIdPrnCh,
-          coverageForm1: { isHid: false, parent: parent1, child: child1 },
-          offerForm1: { isHid: true, parent, child }
+        newcomponentIdParentChild = {
+          ...componentIdParentChild,
+          coverageForm1: { isHidden: false, parent: parent1, child: child1 },
+          offerForm1: { isHidden: true, parent, child }
         };
         currComponent = 'coverageForm1';
       } else if (currComponent === 'coverageForm1') {
-        const { parent, child } = compIdPrnCh.offerForm1;
-        const parent1 = compIdPrnCh.coverageForm1.parent;
-        const child1 = compIdPrnCh.coverageForm1.child;
+        const { parent, child } = componentIdParentChild.offerForm1;
+        const parent1 = componentIdParentChild.coverageForm1.parent;
+        const child1 = componentIdParentChild.coverageForm1.child;
 
-        newCompIdPrnCh = {
-          ...compIdPrnCh,
-          coverageForm1: { isHid: true, parent: parent1, child: child1 },
-          offerForm1: { isHid: false, parent, child }
+        newcomponentIdParentChild = {
+          ...componentIdParentChild,
+          coverageForm1: { isHidden: true, parent: parent1, child: child1 },
+          offerForm1: { isHidden: false, parent, child }
         };
         currComponent = 'offerForm1';
       }
       this.appState.update({
         ...state,
         currComponent,
-        compIdPrnCh: newCompIdPrnCh
+        componentIdParentChild: newcomponentIdParentChild
       });
     });
   }

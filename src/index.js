@@ -24,15 +24,15 @@ const offerForm = new OfferForm(appState);
 const offer = new Offer();
 const coverage = new Coverage();
 
-// map out parent and child associations
+// map out parent and child associations initially
 appState.update({
   ...appState.get(),
-  compIdPrnCh: {
-    WarForm: { isHid: false, parent: 'app', child: 'offerForm1' },
-    offerForm1: { isHid: true, parent: 'WarForm', child: 'offer1' },
-    coverageForm1: { isHid: false, parent: 'WarForm', child: 'coverage1' },
-    offer1: { isHid: false, parent: 'offerForm1', child: null },
-    coverage1: { isHid: false, parent: 'coverageForm1', child: null }
+  componentIdParentChild: {
+    WarForm: { isHidden: false, parent: 'app', child: 'offerForm1' },
+    offerForm1: { isHidden: true, parent: 'WarForm', child: 'offer1' },
+    coverageForm1: { isHidden: false, parent: 'WarForm', child: 'coverage1' },
+    offer1: { isHidden: false, parent: 'offerForm1', child: null },
+    coverage1: { isHidden: false, parent: 'coverageForm1', child: null }
   },
   warranties: [{ id: 'defaultId', name: 'defaultName', year: 'defaultYears' }],
   coverageDetails: [
@@ -53,12 +53,14 @@ appState.update({
   ]
 });
 
-appForm.render('WarForm', 'app');
+// placed the component on the dom and give it a id name
+appForm.render('WarForm');
 offerForm.render(appState.get(), 'offerForm1');
 offer.render(appState.get(), 'offer1');
 coverageForm.render(appState.get(), 'coverageForm1');
 coverage.render(appState.get(), 'coverage1');
 
+// add the components that want to be updated
 appState.addObserver(offer);
 appState.addObserver(coverage);
 appState.addObserver(coverageForm);

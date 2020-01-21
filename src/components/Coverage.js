@@ -23,15 +23,15 @@ class Coverage extends Observer {
    * @param {*} state
    * @param {*} i
    * @param {*} child
-   * @param {*} isHid
+   * @param {*} isHidden
    * @returns string
    * @memberof Coverage
    */
-  createMarkup(state, i, child, isHid) {
-    const hid = isHid ? 'hidden' : '';
+  createMarkup(state, i, child, isHidden) {
+    const hid = isHidden ? 'hidden' : '';
     const { coverageDetails, visibleProducts, visiblePolicyDetails } = state;
 
-    return !isHid
+    return !isHidden
       ? `<form class='productContainer' ${hid} id=${i}>${coverageDetails
           .map((prop, indx) => {
             const currentId = `coverage1-${indx}`;
@@ -114,12 +114,18 @@ class Coverage extends Observer {
    * @memberof Coverage
    */
   render(state, id) {
-    const renderingId = id || this.id;
-    let offerMarkup = '';
-    const { compIdPrnCh } = state;
-    const { isHid, parent, child } = compIdPrnCh[renderingId];
-    offerMarkup = this.createMarkup(state, renderingId, child, isHid);
-    this.addMarkUp(id, id || parent, offerMarkup);
+    const coeverageComponentId = id || this.id;
+    const { componentIdParentChild } = state;
+    const { isHidden, parent, child } = componentIdParentChild[
+      coeverageComponentId
+    ];
+    const componentMarkup = this.createMarkup(
+      state,
+      coeverageComponentId,
+      child,
+      isHidden
+    );
+    this.addMarkUp(id, id || parent, componentMarkup);
   }
 
   /**

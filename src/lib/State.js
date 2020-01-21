@@ -23,8 +23,8 @@ class State extends Subject {
       warranties: [],
       coverageDetails: [],
       currComponent: 'coverageForm1',
-      selectedWar: false,
-      compIdPrnCh: {},
+      selectedWarranty: false,
+      componentIdParentChild: {},
       visibleProducts: {},
       visiblePolicyDetails: {}
     };
