@@ -1,7 +1,7 @@
 # observerPattnMbrry
 design pattern
 
-<a href="https://imgflip.com/gif/3mqvn2"><img src="src/images/mb1.gif" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/gif/3ngr6v"><img src="https://i.imgflip.com/3ngr6v.gif" title="observerPatern with responsive design"/></a>
 
 steps:
 
