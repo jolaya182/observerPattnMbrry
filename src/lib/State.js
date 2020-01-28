@@ -22,7 +22,7 @@ class State extends Subject {
     this.state = {
       warranties: [],
       coverageDetails: [],
-      currComponent: 'coverageForm1',
+      currComponent: 'offerForm1',
       selectedWarranty: false,
       componentIdParentChild: {},
       visibleProducts: {},

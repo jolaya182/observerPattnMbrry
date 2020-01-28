@@ -1,12 +1,60 @@
+
+*{
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+#app {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section {
+  width: 100%;
+  height:50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.productSection {
+  width: 100%;
+  height:50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.smallSection {
+  width: 100%;
+  height:20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switchComponent {
+  height: 80px;
+  background-color: #5995da;
+}
+
+.header {
+  background-color: #b2d6ff;
+  height: auto;
+  justify-content: inherit;
+  align-items: inherit;
+}
+
+.photo img {
+  max-width: 150px;
+  display: block;
+}
+
 .body {
   height: 100%;
   font-family: sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f6f7fb;
-}
-#app {
-  margin: 10px;
 }
 
 .row {
@@ -22,6 +70,11 @@
   flex-basis: 100%;
   flex: 1;
   justify-content: space-around;
+}
+
+.rowOffer img {
+  width:100%;
+  display: block;
 }
 
 .rowOfferSpaceBtwn {
@@ -84,7 +137,6 @@
 
 .productContainer {
   background-color: white;
-  margin: 10px;
 }
 
 .darkPLtr {
@@ -171,4 +223,58 @@
 
 .visibl {
   visibility: visible;
+}
+
+#WarForm {
+  
+}
+
+
+
+/** Mobile */
+@media only screen and (max-width: 400px){
+  
+  
+  #coverageFormBtnCancelWarranty{
+    border: 0px ;
+    border-radius: 0px;
+  }
+  #coverageFormBtnFileAClaim{
+    border: 0px ;
+    border-radius: 0px;
+  }
+  #switchComponent{
+    border: 0px ;
+    border-radius: 0px;
+  }
+
+  #offerFormBtnAddToCart {
+    border: 0px;
+    border-radius: 0px;
+  }
+  .labelPrplBackground{
+    margin: 0px;
+  }
+}
+
+/** Tablet*/
+@media only screen and (min-width: 401px) and (max-width: 960px){
+  
+}
+
+/** Desktop */
+@media only screen and (min-width: 961px){
+  
+  #WarForm {
+   width: 800px;
+   margin: auto;
+  }
+
+  .productSection {
+    width: 100%;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

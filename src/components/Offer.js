@@ -34,7 +34,7 @@ class Offer extends Observer {
 
     return (
       warranties &&
-      `<form ${hid} id=${i}>${warranties
+      `<form class='' ${hid} id=${i}>${warranties
         .map(war => {
           const isWarrantySelected = selectedWarranty === `war-input-${war.id}`;
           const isChecked = isWarrantySelected ? 'checked' : '';

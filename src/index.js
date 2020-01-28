@@ -29,8 +29,8 @@ appState.update({
   ...appState.get(),
   componentIdParentChild: {
     WarForm: { isHidden: false, parent: 'app', child: 'offerForm1' },
-    offerForm1: { isHidden: true, parent: 'WarForm', child: 'offer1' },
-    coverageForm1: { isHidden: false, parent: 'WarForm', child: 'coverage1' },
+    offerForm1: { isHidden: false, parent: 'WarForm', child: 'offer1' },
+    coverageForm1: { isHidden: true, parent: 'WarForm', child: 'coverage1' },
     offer1: { isHidden: false, parent: 'offerForm1', child: null },
     coverage1: { isHidden: false, parent: 'coverageForm1', child: null }
   },

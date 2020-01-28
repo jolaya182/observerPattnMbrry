@@ -44,16 +44,16 @@ class OfferForm extends Observer {
     }
 
     return `
-    <div ${hid} id=${id} class='OfferForm'}> 
-        <div class="rowOfferLeft"><div class='productPrice'> $${productPrice} <label class='line-through'> $2000</label></div></div>
-        <div class="rowOffer"><div class='bold'> <img src=${mbBedPic}> </div></div>    
-        <div class="rowOfferLeft"><div class='bold'> Add Extended Protection</div></div>
-        <div class="rowOfferLeft"><div class='smallerText'> Powered by <label class="darkPLtr">Mulberry</label> <a href="https://getmulberry.com/customers"class='underLine'> Learn More</a></div></div>
-        <div  class="rowOfferSpaceBtwn" ${hid} id=${child}>    
-         
-        </div> 
-      <div class="rowOffer"><button class="rowOffer" id="offerFormBtnAddToCart" type='button'>Add to Cart </button></div>
-    </div>`;
+    <div ${hid} id=${id} > 
+          <div class="row section"><div class='productPrice'> $${productPrice} <label class='line-through'> $2000</label></div></div>
+          <div class="row section "><div class="  photo"> <img src=${mbBedPic}/></div></div>    
+          <div class="row section"><div class='bold'> Add Extended Protection</div></div>
+          <div class="row section"><div class='smallSection'> Powered by <label class="darkPLtr">Mulberry</label> <a href="https://getmulberry.com/customers"class='underLine'> Learn More</a></div></div>
+          <div  class="rowSpaceBtwn " ${hid} id=${child}>    
+          
+          </div> 
+        <div class="rowOffer   section"><button class="rowOffer" id="offerFormBtnAddToCart" type='button'>Add to Cart </button></div>
+      </div>`;
   }
 
   /**

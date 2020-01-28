@@ -36,15 +36,15 @@ class CoverageForm extends Observer {
   createMarkup(state, i, child, isHidden) {
     const hid = isHidden ? 'hidden' : '';
 
-    return `<div ${hid} id=${i}> 
-    <div class='row'><label class='welcome bold'>Welcome Jason!</label></div>
-    <div class='row'><label class='smallerText'>Hope you are having a great day</label></div>
-    <div class='row darkPLtr'>Your Products</div>
-    <div class='row' ${hid} id=${child}>
-      
-      </div>  
-      <div class='rowOffer productContainer'><button class='rowOffer' id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button></div>
-      <div class='rowOffer productContainer'><button class='rowOffer' id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button></div>
+    return `<div ${hid} id=${i}>
+      <div class='row section'><label class='welcome bold'>Welcome Jason!</label></div>
+      <div class='row smallSection'><label class='smallerText'>Hope you are having a great day</label></div>
+      <div class='row darkPLtr smallSection'>Your Products</div>
+      <div class='row' ${hid} id=${child}>
+        
+        </div>  
+        <div class='rowOffer productContainer section'><button class='rowOffer' id="coverageFormBtnFileAClaim" type="submit">FILE A CLAIM</button></div>
+        <div class='rowOffer productContainer section'><button class='rowOffer' id="coverageFormBtnCancelWarranty" type="submit">CANCEL WARRANTY</button></div>
   </div>`;
   }
 

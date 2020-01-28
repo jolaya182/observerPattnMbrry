@@ -42,6 +42,7 @@ class Observer {
       const currentComp = document.getElementById(this.id);
       // if the component does not exist on the Dom then we
       // cannot replace the child
+
       if (currentComp) {
         appCont.replaceChild(frag, currentComp);
       }

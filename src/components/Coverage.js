@@ -36,10 +36,10 @@ class Coverage extends Observer {
           .map((prop, indx) => {
             const currentId = `coverage1-${indx}`;
             const currentPolicyDetailId = `coverage-policy-details-${indx}`;
-            return `<div  class='rowOfferSpaceBtwn ' > 
-            <div id='overage1-${indx}' class=' productName bold'>${
+            return `<div  class='rowOfferSpaceBtwn productSection' > 
+            <div id='overage1-${indx}' class=' productName bold'> ${
               prop.name
-            }</div>  
+            } </div>  
             <div  class='vSymbol darkPLtr'>v</div> 
           </div>
 

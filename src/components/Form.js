@@ -173,10 +173,12 @@ class Form {
     const state = this.appState.get();
     const { formId } = state;
 
-    return `<div  id=${formId}>
+    return `<div  id=${formId} class='column'>
     <div>  </div>
-    <button class='rowOffer' id="switchComponent" type="button"> Switch Component </button>
-  </div>`;
+    <div class=' row section'>
+      <button class='rowOffer ' id="switchComponent" type="button"> Switch Component </button>
+    </div> 
+    </div>`;
   }
 
   /**
@@ -232,9 +234,10 @@ class Form {
       this.fetchData();
     });
     // set listeners to change the current components
-    const formNodes = document.getElementById(formId).childNodes;
+    const formNodes = document.getElementById(formId).childNodes[3];
     let newcomponentIdParentChild = {};
-    formNodes[3].addEventListener('click', e => {
+    const switchComponentButton = formNodes.childNodes[1];
+    switchComponentButton.addEventListener('click', e => {
       e.preventDefault();
       if (currComponent === 'offerForm1') {
         const { parent, child } = componentIdParentChild.offerForm1;
